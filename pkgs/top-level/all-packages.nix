@@ -19741,6 +19741,8 @@ in
 
   manul = callPackage ../development/tools/manul { };
 
+  matwm2 = callPackage ../applications/window-managers/matwm2 { };
+
   mindforger = libsForQt5.callPackage ../applications/editors/mindforger { };
 
   mi2ly = callPackage ../applications/audio/mi2ly {};
