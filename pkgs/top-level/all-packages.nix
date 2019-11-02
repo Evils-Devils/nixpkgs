@@ -1177,6 +1177,8 @@ in
 
   clair = callPackage ../tools/admin/clair { };
 
+  clarissa = callPackage ../tools/networking/clarissa { };
+
   cloud-sql-proxy = callPackage ../tools/misc/cloud-sql-proxy { };
 
   codeql = callPackage ../development/tools/analysis/codeql { };
