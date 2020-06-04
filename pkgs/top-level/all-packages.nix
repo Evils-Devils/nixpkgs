@@ -27333,6 +27333,8 @@ julia_15 = callPackage ../development/compilers/julia/1.5.nix {
 
   velero = callPackage ../applications/networking/cluster/velero { };
 
+  hollywood = callPackage ../applications/misc/hollywood { };
+
   hplip = callPackage ../misc/drivers/hplip { };
 
   hplipWithPlugin = hplip.override { withPlugin = true; };
