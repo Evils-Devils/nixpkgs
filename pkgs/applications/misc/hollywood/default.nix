@@ -46,6 +46,9 @@ stdenv.mkDerivation rec {
     install -Dm 0755 $src/bin/hollywood $out/bin/hollywood
 
     substituteInPlace $out/bin/hollywood --replace \
+      "byobu" "byobu-tmux"
+
+    substituteInPlace $out/bin/hollywood --replace \
       "\$(dirname \$0)/.." "${placeholder "out"}"
 
     wrapProgram $out/bin/hollywood \
