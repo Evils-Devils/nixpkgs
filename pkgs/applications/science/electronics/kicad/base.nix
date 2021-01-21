@@ -22,23 +22,24 @@
 , lndir
 , callPackage
 
+, swig
+, python
+, wxPython
+, opencascade
+, opencascade-occt
+, libngspice
+, valgrind
+
 , stable
 , baseName
 , kicadSrc
 , kicadVersion
 , i18n
 , withOCE
-, opencascade
 , withOCC
-, opencascade-occt
 , withNgspice
-, libngspice
 , withScripting
-, swig
-, python
-, wxPython
 , debug
-, valgrind
 , withI18n
 }:
 
