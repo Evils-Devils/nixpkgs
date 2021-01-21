@@ -22,6 +22,17 @@
 , lndir
 , callPackage
 
+, util-linux
+, libselinux
+, libsepol
+, libthai
+, libdatrie
+, libxkbcommon
+, epoxy
+, dbus_daemon
+, at_spi2_core
+, xlibs
+
 , swig
 , python
 , wxPython
@@ -117,6 +128,17 @@ stdenv.mkDerivation rec {
     curl
     openssl
     boost
+
+    util-linux
+    libselinux
+    libsepol
+    libthai
+    libdatrie
+    libxkbcommon
+    epoxy
+    dbus_daemon.dev
+    at_spi2_core
+    xlibs.libXtst
   ]
   ++ optionals (withScripting) [ swig python wxPython ]
   ++ optional (withNgspice) libngspice
