@@ -198,6 +198,8 @@ stdenv.mkDerivation rec {
     # wrapGAppsHook did these two as well, no idea if it matters...
     "--prefix XDG_DATA_DIRS : ${cups}/share"
     "--prefix GIO_EXTRA_MODULES : ${gnome3.dconf}/lib/gio/modules"
+    # required to open a bug report link in firefox-wayland
+    "--set-default MOZ_DBUS_REMOTE 1"
   ]
   ++ optionals (stable)
   [
