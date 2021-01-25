@@ -31,6 +31,7 @@
 , with3d ? true
 , withI18n ? true
 , srcs ? { }
+, withWayland ? false
 }:
 
 # The `srcs` parameter can be used to override the kicad source code
@@ -168,7 +169,7 @@ stdenv.mkDerivation rec {
     inherit kicadSrc kicadVersion;
     inherit (passthru) i18n;
     inherit wxGTK python wxPython;
-    inherit debug withI18n withOCC withOCE withNgspice withScripting;
+    inherit debug withI18n withOCC withOCE withNgspice withScripting withWayland;
   };
 
   inherit pname;

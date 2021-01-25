@@ -52,13 +52,14 @@
 , withScripting
 , debug
 , withI18n
+, withWayland
 }:
 
 assert lib.asserts.assertMsg (!(withOCE && stdenv.isAarch64)) "OCE fails a test on Aarch64";
 assert lib.asserts.assertMsg (!(withOCC && withOCE))
   "Only one of OCC and OCE may be enabled";
 let
-  inherit (lib) optional optionals;
+  inherit (lib) optional optionals optionalString;
 in
 stdenv.mkDerivation rec {
   pname = "kicad-base";
@@ -71,13 +72,18 @@ stdenv.mkDerivation rec {
   # nix removes .git, so its approximated here
   postPatch = ''
     substituteInPlace CMakeModules/KiCadVersion.cmake \
-      --replace "unknown" "${builtins.substring 0 10 src.rev}" \
+      --replace "unknown" "${builtins.substring 0 10 src.rev}"
+  ''
+  + optionalString (withWayland) ''
+    substituteInPlace kicad/kicad.cpp \
+      --replace "x11" "wayland"
+    substituteInPlace common/single_top.cpp \
+      --replace "x11" "wayland"
   '';
 
   makeFlags = optional (debug) [ "CFLAGS+=-Og" "CFLAGS+=-ggdb" ];
 
-  cmakeFlags =
-    optionals (withScripting) [
+  cmakeFlags = optionals (withScripting) [
       "-DKICAD_SCRIPTING=ON"
       "-DKICAD_SCRIPTING_MODULES=ON"
       "-DKICAD_SCRIPTING_PYTHON3=ON"
@@ -101,6 +107,9 @@ stdenv.mkDerivation rec {
       "-DKICAD_STDLIB_DEBUG=ON"
       "-DKICAD_USE_VALGRIND=ON"
       "-DKICAD_SANITIZE=ON"
+    ]
+    ++ optionals (withWayland) [
+      "-DKICAD_USE_EGL=ON"
     ]
   ;
 
